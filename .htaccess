@@ -1,9 +1,76 @@
-# Compressão (gzip)
+# ===================================================================
+#  Geovanna B Nutri — configuração Apache (.htaccess)
+#  Performance (gzip + cache) · Segurança (HTTPS, headers, proteções)
+# ===================================================================
+
+# -------------------------------------------------------------------
+# 1) Força HTTPS (todo acesso http:// vira https://)
+# -------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# -------------------------------------------------------------------
+# 2) Cabeçalhos de segurança (proteção contra ataques + PageSpeed)
+# -------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # HSTS — obriga o navegador a usar sempre HTTPS por 1 ano
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Impede que o site seja embutido em iframes de terceiros (clickjacking)
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Bloqueia "MIME sniffing" (navegador não adivinha tipo de arquivo)
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Controla o que é enviado no cabeçalho Referer (privacidade)
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Isolamento de origem (proteção contra ataques cross-origin)
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+
+  # Desliga APIs sensíveis que o site não usa (câmera, microfone, GPS…)
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), accelerometer=()"
+
+  # Content Security Policy — controla de onde recursos podem carregar.
+  # 'unsafe-inline' é necessário pois o CSS/JS estão embutidos no HTML.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'; upgrade-insecure-requests"
+
+  # Remove o cabeçalho que revela a versão do PHP (menos pistas p/ atacante)
+  Header unset X-Powered-By
+</IfModule>
+
+# -------------------------------------------------------------------
+# 3) Proteções de arquivos e diretórios
+# -------------------------------------------------------------------
+# Desativa listagem de diretórios (não mostra conteúdo de pastas)
+Options -Indexes
+
+# Bloqueia acesso a arquivos ocultos/sensíveis (.htaccess, .git, .yml, etc.)
+# Mantém liberado o /.well-known (necessário para renovação do certificado SSL)
+<IfModule mod_authz_core.c>
+  <FilesMatch "(^\.ht|^\.git|\.ya?ml$|^\.env|^README)">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+# Impede execução de scripts dentro da pasta de uploads/assets (defesa extra)
+<IfModule mod_rewrite.c>
+  RewriteRule ^assets/.*\.(php|phtml|php[0-9]|pl|py|cgi|sh)$ - [F,L]
+</IfModule>
+
+# -------------------------------------------------------------------
+# 4) Compressão (gzip)
+# -------------------------------------------------------------------
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml text/plain
 </IfModule>
 
-# Cache do navegador
+# -------------------------------------------------------------------
+# 5) Cache do navegador
+# -------------------------------------------------------------------
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/html "access plus 0 seconds"
