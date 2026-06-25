@@ -822,16 +822,15 @@ em{font-style:italic}
 (function(){
   function capable(){
     try{
-      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false; // acessibilidade
-      if(window.innerWidth < 768) return false;                                        // evita tranco no mobile/toque
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false; // acessibilidade (Reduzir movimento)
+      if(window.innerWidth < 768) return false;                                        // celulares (tela pequena/toque)
       var c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
       if(c){
         if(c.saveData) return false;                                                   // economia de dados ligada
-        var et=c.effectiveType||'';
-        if(et==='slow-2g'||et==='2g'||et==='3g') return false;                         // conexão lenta
+        if((c.effectiveType||'')==='slow-2g') return false;                            // só bloqueia conexão MUITO lenta
       }
-      if(typeof navigator.deviceMemory==='number' && navigator.deviceMemory<4) return false;        // pouca RAM
-      if(typeof navigator.hardwareConcurrency==='number' && navigator.hardwareConcurrency<4) return false; // poucos núcleos
+      if(typeof navigator.deviceMemory==='number' && navigator.deviceMemory<2) return false;        // RAM muito baixa (1GB)
+      if(typeof navigator.hardwareConcurrency==='number' && navigator.hardwareConcurrency<2) return false; // 1 núcleo só
       return true;
     }catch(e){ return false; }
   }
