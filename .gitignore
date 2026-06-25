@@ -1,0 +1,30 @@
+# Sistema
+.DS_Store
+
+# Ferramentas locais
+.claude/
+
+# Backups locais
+*.backup.html
+*.backup2.html
+*.backup3.html
+"Geovanna Barreto - Site (standalone).backup*.html"
+
+# Pacote de deploy (artefato gerado, não versionar)
+*.zip
+
+# Fotos originais (RAW/JPG de trabalho) — não vão para o repo
+Fotos Geovanna/
+
+# Imagens-fonte / originais — só os assets usados pelo site vão para o repo
+assets/*
+!assets/fonts
+!assets/fonts/*.woff2
+!assets/geovanna-1.webp
+!assets/geovanna-2.webp
+!assets/geovanna-3.webp
+!assets/local-1.webp
+!assets/local-2.webp
+!assets/logo-2.svg
+!assets/logo-3.svg
+!assets/favicon.svg
