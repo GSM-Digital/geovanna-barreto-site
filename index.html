@@ -755,7 +755,7 @@ em{font-style:italic}
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2026 Geovanna Barreto</div>
+      <div>© <span id="year">2026</span> Geovanna Barreto</div>
       <div>Desenvolvido por <a href="https://thbarreto.com.br/" target="_blank" rel="noopener">Thiago Barreto</a></div>
     </div>
   </div>
@@ -785,6 +785,10 @@ em{font-style:italic}
   // FAQ accordion (fallback for browsers without <details name>)
   var faq=document.querySelectorAll('.faq-list details');
   faq.forEach(function(d){d.addEventListener('toggle',function(){if(d.open){faq.forEach(function(o){if(o!==d&&o.open)o.open=false;});}});});
+
+  // Ano do rodapé — sempre o ano atual no fuso de Brasília (UTC-3)
+  var y=document.getElementById('year');
+  if(y){ y.textContent=new Date(Date.now()-10800000).getUTCFullYear(); }
 })();
 
 // Parallax — só ativa se dispositivo e conexão forem capazes (senão, versão estática)
