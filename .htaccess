@@ -36,7 +36,8 @@
 
   # Content Security Policy — controla de onde recursos podem carregar.
   # 'unsafe-inline' é necessário pois o CSS/JS estão embutidos no HTML.
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'; upgrade-insecure-requests"
+  # cdn.trustindex.io + https: liberados para o widget de avaliações do Google.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.trustindex.io; style-src 'self' 'unsafe-inline' https://cdn.trustindex.io; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https://cdn.trustindex.io https://*.trustindex.io; frame-src https://cdn.trustindex.io https://*.trustindex.io; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'; upgrade-insecure-requests"
 
   # Remove o cabeçalho que revela a versão do PHP (menos pistas p/ atacante)
   Header unset X-Powered-By
