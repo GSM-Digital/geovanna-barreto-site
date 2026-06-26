@@ -5,6 +5,7 @@ deployment:
     - export DEPLOYPATH=/home2/thi75404/geovannabnutri.com.br
     - /bin/mkdir -p "$DEPLOYPATH/assets"
     - /bin/cp -f index.html "$DEPLOYPATH/"
+    - /bin/cp -f sobre.html "$DEPLOYPATH/"
     - /bin/cp -f .htaccess "$DEPLOYPATH/"
     - /bin/cp -f robots.txt "$DEPLOYPATH/"
     - /bin/cp -f sitemap.xml "$DEPLOYPATH/"
