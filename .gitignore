@@ -16,6 +16,12 @@
 # Fotos originais (RAW/JPG de trabalho) — não vão para o repo
 Fotos Geovanna/
 
+# Mídia de outros projetos (hero do WordPress) — não pertence a este site
+*.gif
+*.mp4
+*.webm
+hero-poster.webp
+
 # Imagens-fonte / originais — só os assets usados pelo site vão para o repo
 assets/*
 !assets/fonts

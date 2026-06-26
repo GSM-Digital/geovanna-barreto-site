@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://geovannabnutri.com.br/</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://geovannabnutri.com.br/assets/geovanna-3.webp</image:loc>
+      <image:title>Geovanna Barreto, nutricionista comportamental em Goiânia</image:title>
+    </image:image>
+  </url>
+</urlset>

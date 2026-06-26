@@ -7,7 +7,7 @@
 <meta name="description" content="Geovanna Barreto, nutricionista comportamental em Goiânia e atendimento online para todo o Brasil e exterior. Plano alimentar sem dieta restritiva, construído com você. Agende pelo WhatsApp.">
 <meta name="keywords" content="nutricionista Goiânia, nutricionista comportamental, reeducação alimentar, emagrecimento sem dieta, nutricionista online, plano alimentar, Geovanna Barreto">
 <meta name="author" content="Geovanna Barreto">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="theme-color" content="#143429">
 <link rel="canonical" href="https://geovannabnutri.com.br/">
 
@@ -245,7 +245,7 @@ em{font-style:italic}
 .method-head p{font-size:16px;color:var(--ink-soft);line-height:1.7;max-width:460px}
 .method-rail{position:relative}
 .method-rail .curve{position:absolute;top:60px;left:0;width:100%;height:80px;z-index:0}
-.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;list-style:none;margin:0;padding:0}
 .step{background:var(--cream);border-radius:24px;padding:28px;border:1px solid rgba(168,181,160,.5);min-height:280px;height:100%}
 .step .n{width:64px;height:64px;border-radius:50%;background:var(--green);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-style:italic;font-size:24px;margin-bottom:24px}
 .step h3{font-size:22px}
@@ -446,12 +446,44 @@ em{font-style:italic}
     },
     {
       "@type":"Person",
+      "@id":"https://geovannabnutri.com.br/#geovanna",
       "name":"Geovanna Barreto",
       "jobTitle":"Nutricionista Comportamental",
+      "description":"Nutricionista comportamental formada pela PUC-GO (CRN-1 22560). Atende em Goiânia e online, com foco em reeducação alimentar sem dietas restritivas, plano alimentar individualizado e acompanhamento próximo.",
       "worksFor":{"@id":"https://geovannabnutri.com.br/#business"},
-      "alumniOf":"PUC-GO",
+      "alumniOf":{"@type":"CollegeOrUniversity","name":"PUC-GO — Pontifícia Universidade Católica de Goiás"},
+      "hasCredential":[
+        {"@type":"EducationalOccupationalCredential","credentialCategory":"degree","educationalLevel":"Bacharelado em Nutrição","recognizedBy":{"@type":"CollegeOrUniversity","name":"PUC-GO"}},
+        {"@type":"EducationalOccupationalCredential","credentialCategory":"license","name":"CRN-1 22560","recognizedBy":{"@type":"Organization","name":"Conselho Regional de Nutricionistas - 1ª Região (CRN-1)"}}
+      ],
+      "knowsAbout":["Nutrição comportamental","Reeducação alimentar","Emagrecimento sem dieta restritiva","Nutrição para hipertrofia","Saúde intestinal","Nutrição para gestantes e adolescentes","Atendimento nutricional online"],
       "image":"https://geovannabnutri.com.br/assets/geovanna-3.webp",
+      "sameAs":["https://instagram.com/geovannabnutri"],
       "url":"https://geovannabnutri.com.br/"
+    },
+    {
+      "@type":"WebSite",
+      "@id":"https://geovannabnutri.com.br/#website",
+      "url":"https://geovannabnutri.com.br/",
+      "name":"Geovanna Barreto · Nutricionista Comportamental",
+      "inLanguage":"pt-BR",
+      "publisher":{"@id":"https://geovannabnutri.com.br/#business"}
+    },
+    {
+      "@type":"Service",
+      "name":"Consulta nutricional presencial em Goiânia",
+      "serviceType":"Nutrição comportamental",
+      "provider":{"@id":"https://geovannabnutri.com.br/#business"},
+      "areaServed":{"@type":"City","name":"Goiânia"},
+      "description":"Consulta presencial com avaliação física (bioimpedância e adipometria), plano alimentar individualizado entregue na hora da consulta e suporte por WhatsApp entre as consultas."
+    },
+    {
+      "@type":"Service",
+      "name":"Atendimento nutricional online",
+      "serviceType":"Nutrição comportamental online",
+      "provider":{"@id":"https://geovannabnutri.com.br/#business"},
+      "areaServed":["Brasil","Portugal","Estados Unidos","Austrália"],
+      "description":"Atendimento por chamada de vídeo para todo o Brasil e exterior, com plano alimentar entregue na hora da consulta e suporte por WhatsApp entre as consultas."
     },
     {
       "@type":"FAQPage",
@@ -567,8 +599,8 @@ em{font-style:italic}
 <section class="section" id="sobre">
   <div class="wrap about-grid">
     <div class="collage reveal">
-      <div class="back"><img src="assets/geovanna-2.webp" alt="Geovanna Barreto sorrindo" width="760" height="1140" loading="lazy" data-px-img="0.07"></div>
-      <div class="front"><img src="assets/geovanna-1.webp" alt="Geovanna Barreto" width="660" height="990" loading="lazy" data-px-img="-0.05"></div>
+      <div class="back"><img src="assets/geovanna-2.webp" alt="Geovanna Barreto, nutricionista comportamental em Goiânia, sorrindo" width="760" height="1140" loading="lazy" data-px-img="0.07"></div>
+      <div class="front"><img src="assets/geovanna-1.webp" alt="Retrato de Geovanna Barreto, nutricionista, formada pela PUC-GO (CRN-1 22560)" width="660" height="990" loading="lazy" data-px-img="-0.05"></div>
     </div>
     <div class="about-body">
       <div class="eyebrow reveal">Quem sou eu</div>
@@ -608,12 +640,12 @@ em{font-style:italic}
     </div>
     <div class="method-rail">
       <svg class="curve" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path d="M 80,40 Q 360,-20 600,40 T 1120,40" stroke="#A8B5A0" stroke-width="2" stroke-dasharray="2 6" fill="none"/></svg>
-      <div class="steps">
-        <div class="step reveal"><div class="n">01</div><h3>Pré-consulta</h3><p>Questionário curto sobre rotina, histórico e objetivos. Chego sabendo onde estamos pisando.</p></div>
-        <div class="step reveal"><div class="n">02</div><h3>Consulta completa</h3><p>Cerca de 1h de conversa. Avaliação física com adipômetro, bioimpedância e fotos no presencial.</p></div>
-        <div class="step reveal"><div class="n">03</div><h3>Avaliação nutricional</h3><p>Análise de exames e momento de vida. Plano com substituições e flexibilidade real.</p></div>
-        <div class="step reveal"><div class="n">04</div><h3>Pós-consulta</h3><p>Plano alimentar entregue na hora da consulta. Suporte por WhatsApp entre as consultas.</p><p style="font-size:11px;opacity:.6;margin-top:4px">*podendo haver variação</p></div>
-      </div>
+      <ol class="steps">
+        <li class="step reveal"><div class="n">01</div><h3>Pré-consulta</h3><p>Questionário curto sobre rotina, histórico e objetivos. Chego sabendo onde estamos pisando.</p></li>
+        <li class="step reveal"><div class="n">02</div><h3>Consulta completa</h3><p>Cerca de 1h de conversa. Avaliação física com adipômetro, bioimpedância e fotos no presencial.</p></li>
+        <li class="step reveal"><div class="n">03</div><h3>Avaliação nutricional</h3><p>Análise de exames e momento de vida. Plano com substituições e flexibilidade real.</p></li>
+        <li class="step reveal"><div class="n">04</div><h3>Pós-consulta</h3><p>Plano alimentar entregue na hora da consulta. Suporte por WhatsApp entre as consultas.</p><p style="font-size:11px;opacity:.6;margin-top:4px">*podendo haver variação</p></li>
+      </ol>
     </div>
     <div class="online reveal">
       <div class="glow"></div>

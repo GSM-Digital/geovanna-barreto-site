@@ -1,0 +1,51 @@
+# robots.txt — geovannabnutri.com.br
+# Acesso total para buscadores e motores de resposta por IA (GEO/AEO)
+
+User-agent: *
+Allow: /
+
+# --- Motores de busca tradicionais ---
+User-agent: Googlebot
+Allow: /
+User-agent: Google-InspectionTool
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: DuckDuckBot
+Allow: /
+User-agent: Applebot
+Allow: /
+
+# --- IA / motores de resposta (LLMs) ---
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+User-agent: meta-externalagent
+Allow: /
+User-agent: Bytespider
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: cohere-ai
+Allow: /
+
+Sitemap: https://geovannabnutri.com.br/sitemap.xml
