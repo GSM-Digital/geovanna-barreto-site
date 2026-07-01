@@ -6,7 +6,6 @@ deployment:
     - /bin/mkdir -p "$DEPLOYPATH/assets"
     - /bin/mkdir -p "$DEPLOYPATH/contato"
     - /bin/cp -f index.html "$DEPLOYPATH/"
-    - /bin/cp -f sobre.html "$DEPLOYPATH/"
     - /bin/cp -f contato/index.html "$DEPLOYPATH/contato/"
     - /bin/cp -f .htaccess "$DEPLOYPATH/"
     - /bin/cp -f robots.txt "$DEPLOYPATH/"
