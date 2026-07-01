@@ -11,4 +11,16 @@
       <image:title>Geovanna Barreto, nutricionista comportamental em Goiânia</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://geovannabnutri.com.br/sobre.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://geovannabnutri.com.br/contato/</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
