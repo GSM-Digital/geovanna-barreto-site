@@ -4,9 +4,7 @@ deployment:
     # Domínio: geovannabnutri.com.br  ·  Usuário cPanel: thi75404
     - export DEPLOYPATH=/home2/thi75404/geovannabnutri.com.br
     - /bin/mkdir -p "$DEPLOYPATH/assets"
-    - /bin/mkdir -p "$DEPLOYPATH/contato"
     - /bin/cp -f index.html "$DEPLOYPATH/"
-    - /bin/cp -f contato/index.html "$DEPLOYPATH/contato/"
     - /bin/cp -f .htaccess "$DEPLOYPATH/"
     - /bin/cp -f robots.txt "$DEPLOYPATH/"
     - /bin/cp -f sitemap.xml "$DEPLOYPATH/"
