@@ -275,7 +275,9 @@ em{font-style:italic}
 .tst-row{display:flex;align-items:center;gap:12px}
 .tst-arrow{flex-shrink:0;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #dadce0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 1px 2px rgba(0,0,0,.06)}
 .tst-arrow:hover{transform:scale(1.08)}
-.tst-track{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tst-track{flex:1;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:4px 2px 10px}
+.tst-track::-webkit-scrollbar{display:none}
+.tst-track>.rev{flex:0 0 calc((100% - 36px)/4);scroll-snap-align:start;height:262px}
 .rev{background:#fff;border-radius:8px;border:1px solid #e8eaed;padding:16px;min-height:200px;display:flex;flex-direction:column;font-family:"Roboto",Arial,sans-serif;box-shadow:0 1px 2px rgba(60,64,67,.06)}
 .rev-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
 .rev-id{display:flex;align-items:center;gap:10px}
@@ -284,7 +286,7 @@ em{font-style:italic}
 .rev-when{font-size:12px;color:#5f6368;margin-top:2px}
 .rev-stars{display:flex;align-items:center;gap:6px;margin-bottom:10px}
 .rev-stars .s{color:#FBBC05;letter-spacing:1px;font-size:15px}
-.rev p{font-size:14px;color:#202124;line-height:1.5;margin:0;flex:1}
+.rev p{font-size:14px;color:#202124;line-height:1.5;margin:0;flex:1;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}
 .rev .more{font-size:12px;color:#5f6368;margin-top:12px;padding-top:10px;border-top:1px solid #f1f3f4}
 
 /* Where */
@@ -371,8 +373,7 @@ em{font-style:italic}
   .method-rail .curve{display:none}
   .online-grid{grid-template-columns:1fr;gap:28px}
   .footer-top{grid-template-columns:1fr 1fr;gap:28px}
-  .tst-track{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(240px,1fr);overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:8px}
-  .rev{scroll-snap-align:start}
+  .tst-track>.rev{flex-basis:calc((100% - 12px)/2)}
 }
 @media (max-width:900px){
   .hero-grid{grid-template-columns:1fr;gap:40px}
@@ -385,6 +386,8 @@ em{font-style:italic}
 }
 @media (max-width:760px){
   :root{--pad:20px}
+  .tst-track>.rev{flex-basis:100%}
+  .tst-arrow{display:none}
   .section{padding:80px var(--pad)}
   .hero{padding:32px var(--pad) 80px}
   .main-nav,.header-cta{display:none}
@@ -679,28 +682,152 @@ em{font-style:italic}
       <h2 class="reveal"><em>Quem viveu,</em><br>conta melhor.</h2>
       <div class="tst-score reveal"><span class="num">5,0</span><span class="stars">★★★★★</span><span class="meta">· Google · 32 avaliações</span></div>
     </div>
-    <!-- Avaliações reais do Google (nativo) -->
-    <div class="tst-track reveal">
+    <!-- Avaliações reais do Google (nativo) · carrossel -->
+    <div class="tst-row reveal">
+      <button class="tst-arrow" id="tstPrev" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="tst-track" id="tstTrack">
         <article class="rev">
-          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#7BB084">A</div><div><div class="rev-name">Anna Luíza Maciel</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#5BA3D0">A</div><div><div class="rev-name">Anna Luíza Maciel</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
           <div class="rev-stars"><span class="s">★★★★★</span></div>
           <p>Cheguei até a Geovanna por indicação. Faço acompanhamento nutricional há seis meses e ela é uma excelente profissional. Cada consulta é um aprendizado sobre dieta e vida saudável, de uma forma leve e que cabe na minha rotina. Recomendo e indico!</p>
         </article>
         <article class="rev">
-          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#E8B547">J</div><div><div class="rev-name">Jordana Fernandes</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#7BB084">A</div><div><div class="rev-name">Anna Paula Fernandes</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
           <div class="rev-stars"><span class="s">★★★★★</span></div>
-          <p>A minha experiência com a Geovanna foi ótima!! Consulta excelente, sempre pontual, tira todas as dúvidas (inclusive pelo WhatsApp). Já fui em muitas nutricionistas e ela foi a que mais gostei, indico para todos!</p>
+          <p>A Geo é uma nutri com um atendimento diferente de todos os que já tive. Suas consultas são adaptadas para a realidade do paciente, o que torna o tratamento mais palpável, além de ter uma abordagem humanizada.</p>
         </article>
         <article class="rev">
-          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#5BA3D0">A</div><div><div class="rev-name">Aline Camargo</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#9B6CB8">P</div><div><div class="rev-name">Paula Lula</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Maravilhosa. Faço acompanhamento há quase um ano. Dieta simples, que respeita a correria do meu dia e minhas preferências, ficando muito mais fácil manter a constância. Sempre disponível pra tirar dúvidas. Tem ótimos materiais em PDF também. Recomendo pra todos.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#E8B547">G</div><div><div class="rev-name">Gisele Gill</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Dieta com comida de verdade. Fui com o intuito de perder/manter peso e o resultado veio: perdi 1,7kg de gordura. Geovanna é ótima!</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#D9736A">A</div><div><div class="rev-name">Aline Camargo</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
           <div class="rev-stars"><span class="s">★★★★★</span></div>
           <p>O acompanhamento da Geovanna é sensível e cuidadoso. Gentil e acessível, ela inspira mudanças nas escolhas alimentares e nos hábitos da rotina. Não é só seguir uma dieta, é ter uma companheira rumo à qualidade de vida.</p>
         </article>
         <article class="rev">
-          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#9B6CB8">B</div><div><div class="rev-name">BeautyByDuda</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#4DA3A0">B</div><div><div class="rev-name">BeautyByDuda</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
           <div class="rev-stars"><span class="s">★★★★★</span></div>
-          <p>A Geo é muito solícita! Me ajudou MUITO com meu processo de intolerância alimentar, investigou a fundo meu caso e tornou tudo mais fácil. Dietas práticas e adaptadas à rotina. Fiz acompanhamento por 6 meses e indico a todos!</p>
+          <p>A Geo é muito solícita! Me ajudou MUITO com meu processo de intolerância alimentar, investigou a fundo meu caso e tornou tudo mais fácil. Dietas práticas e adaptadas à rotina. Fiz acompanhamento por 6 meses e indico a todos. Você é incrível!</p>
         </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#E0885B">J</div><div><div class="rev-name">Jordana Fernandes</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>A minha experiência com a Geovanna foi ótima!! Consulta excelente, sempre pontual, tira todas as dúvidas (inclusive pelo WhatsApp). Já fui em muitas nutricionistas e ela foi a que mais gostei, indico para todos!</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#7986CB">L</div><div><div class="rev-name">Laís Leão</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Geovanna é muito dedicada e inteligente, me fez repensar meus hábitos e aderir a uma rotina saudável, sem terrorismo e com muito equilíbrio! Mesmo eu morando em outro país, ela não mediu esforços para me ajudar.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#5BA3D0">S</div><div><div class="rev-name">Suellen Kauffman</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>A Geovanna é uma excelente profissional desde a nossa primeira consulta. Sempre muito atenciosa e preocupada em entender minha rotina e alimentação, além de estar sempre disposta a tirar todas as minhas dúvidas.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#7BB084">A</div><div><div class="rev-name">Ana Gabryella Coelho Chagas</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Maravilhosa! Já faço acompanhamento há mais de um ano e não me canso de recomendar. Aqui a gente aprende a ter um estilo de vida saudável sem neurose! Comemos de tudo, mas não tudo o tempo todo. Perfeita.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#9B6CB8">M</div><div><div class="rev-name">Marluce Ferreira de Assis Costa</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Geovanna é uma excelente profissional. Consegui os objetivos almejados. Ela explica, mostra nosso crescimento e faz os acompanhamentos de forma clara, leve e prazerosa.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#E8B547">S</div><div><div class="rev-name">Saulo Martins</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>A Geovanna é uma excelente profissional. O plano alimentar feito por ela atende às minhas necessidades diárias e à minha rotina bastante puxada. Outro ponto alto é a atenção a cada consulta, acho isso maravilhoso.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#D9736A">M</div><div><div class="rev-name">Milena</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>A Geovanna é excelente. Eu sempre tive dificuldade de ganhar peso/massa e com ela eu consegui. É muito humana e respeita nossos gostos, não faz aquelas dietas impossíveis. É muito bom fazer acompanhamento com ela.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#4DA3A0">E</div><div><div class="rev-name">Erika Naves</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Ótima profissional, educada e calma pra explicar cada passo da dieta. E muito atenciosa! Super recomendo.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#E0885B">T</div><div><div class="rev-name">Tatyane Lima</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Profissional espetacular! Atenciosa, competente. Te deixa à vontade e adapta tudo ao que você precisa.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#7986CB">F</div><div><div class="rev-name">Flúvia Barreto</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Nutri maravilhosa. Entende não somente das questões nutricionais, mas também tem muita atenção e cuidado com os pacientes.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#5BA3D0">S</div><div><div class="rev-name">Sami Fort</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Excelente profissional! Muito empática, cuidadosa e atenciosa.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#7BB084">L</div><div><div class="rev-name">Lucas Souza</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Ótimo atendimento, recomendo para todos os meus alunos de personal!</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#9B6CB8">M</div><div><div class="rev-name">Marina Abadio</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Super atenciosa, fez meu plano alimentar sem fugir da minha realidade e com alimentos que eu gosto.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#E8B547">A</div><div><div class="rev-name">Alanis Duarte</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>A melhor nutri de Goiânia!!</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#D9736A">M</div><div><div class="rev-name">Mari</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Uma ótima profissional, tem me ajudado muito no meu processo de emagrecimento.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#4DA3A0">M</div><div><div class="rev-name">Mariana Tavares</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>A melhor! Muito atenciosa, sempre tirando as dúvidas, com suporte online. Muito incrível!</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#E0885B">A</div><div><div class="rev-name">Ana Isabela Egídio</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Maravilhosa! Profissional muito atenciosa e competente.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#7986CB">E</div><div><div class="rev-name">Evangelina Leite</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Excelente, ótima profissional.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#5BA3D0">M</div><div><div class="rev-name">Mateus Mojô</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Muito educada, atenciosa e receptiva!</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#7BB084">T</div><div><div class="rev-name">Teresinha Dantas Caixeta</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>A profissional é bastante carismática e comunicativa. Avalia os planos de forma individual e faz observações pontuais e necessárias para cada um atingir suas metas.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#9B6CB8">L</div><div><div class="rev-name">Laís El Kadi</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>Maravilhosa!! Sempre muito didática e compreensiva, mas sabe dar aqueles puxões de orelha quando precisa.</p>
+        </article>
+        <article class="rev">
+          <div class="rev-top"><div class="rev-id"><div class="rev-av" style="background:#E8B547">M</div><div><div class="rev-name">Marinna Ferreira</div><div class="rev-when">Avaliação no Google</div></div></div><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg></div>
+          <div class="rev-stars"><span class="s">★★★★★</span></div>
+          <p>A melhor nutri que eu poderia conhecer. Tive ótimos resultados seguindo direitinho o que foi passado. Uma alimentação saudável, regrada e que não deixa a gente com fome.</p>
+        </article>
+      </div>
+      <button class="tst-arrow" id="tstNext" aria-label="Próximo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5f6368" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
     </div>
   </div>
 </section>
@@ -838,6 +965,22 @@ em{font-style:italic}
   faq.forEach(function(d){d.addEventListener('toggle',function(){if(d.open){faq.forEach(function(o){if(o!==d&&o.open)o.open=false;});}});});
 
   // Ano do rodapé — sempre o ano atual no fuso de Brasília (UTC-3)
+  // Carrossel de avaliações
+  var track=document.getElementById('tstTrack');
+  if(track){
+    var pg=function(d){track.scrollBy({left:d*track.clientWidth,behavior:'smooth'});};
+    var pv=document.getElementById('tstPrev'),nx=document.getElementById('tstNext');
+    if(pv)pv.addEventListener('click',function(){pg(-1);});
+    if(nx)nx.addEventListener('click',function(){pg(1);});
+    if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      var timer=setInterval(function(){
+        if(track.scrollLeft+track.clientWidth>=track.scrollWidth-5){track.scrollTo({left:0,behavior:'smooth'});}
+        else{pg(1);}
+      },5000);
+      var row=track.parentNode;
+      ['mouseenter','touchstart','focusin'].forEach(function(ev){row.addEventListener(ev,function(){clearInterval(timer);},{passive:true});});
+    }
+  }
   var y=document.getElementById('year');
   if(y){ y.textContent=new Date(Date.now()-10800000).getUTCFullYear(); }
 })();
