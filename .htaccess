@@ -4,12 +4,19 @@
 # ===================================================================
 
 # -------------------------------------------------------------------
-# 1) Força HTTPS (todo acesso http:// vira https://)
+# 1) URL canônica: HTTPS, sem www e sem /index.html
 # -------------------------------------------------------------------
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteCond %{HTTPS} off
-  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Evita uma segunda versão indexável da página inicial.
+  RewriteCond %{THE_REQUEST} \s/+index\.html[?\s] [NC]
+  RewriteRule ^index\.html$ https://geovannabnutri.com.br/ [L,R=301]
+
+  # Consolida http/https e www/sem-www em uma única origem.
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} !^geovannabnutri\.com\.br$ [NC]
+  RewriteRule ^ https://geovannabnutri.com.br%{REQUEST_URI} [L,R=301,NE]
 </IfModule>
 
 # -------------------------------------------------------------------

@@ -3,12 +3,19 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://geovannabnutri.com.br/</loc>
-    <lastmod>2026-06-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-08-30</lastmod>
     <image:image>
       <image:loc>https://geovannabnutri.com.br/assets/geovanna-3.webp</image:loc>
-      <image:title>Geovanna Barreto, nutricionista comportamental em Goiânia</image:title>
+      <image:title>Geovanna Barreto, nutricionista em Goiânia</image:title>
+      <image:caption>Geovanna Barreto oferece consulta nutricional presencial em Goiânia e atendimento online.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://geovannabnutri.com.br/assets/geovanna-2.webp</image:loc>
+      <image:title>Nutricionista Geovanna Barreto em Goiânia</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://geovannabnutri.com.br/assets/geovanna-1.webp</image:loc>
+      <image:title>Geovanna Barreto, nutricionista CRN-1 22560</image:title>
     </image:image>
   </url>
 </urlset>
